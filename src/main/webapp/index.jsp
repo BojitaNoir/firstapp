@@ -13,14 +13,11 @@
       <p>Practica 1 Servlets para realizar un CRUD de usuarios</p>
       <div class="card">
         <div class="card-header">
-          <div class="ca
-          rd-body">
             <div class="col">Listado de Usuarios</div>
             <div class="col text-end" >
               <button class="btn btn-outline-success btn-sm">Agregar
               </button>
             </div>
-          </div>
         </div>
         <div class="card-body">
           <table class="table table-stripped">
