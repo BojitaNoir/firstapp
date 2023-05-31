@@ -6,6 +6,7 @@ public class user  {
     private Long id;
     private String name;
     private String lastname;
+    private String surname;
     private String birthday;
     private String usernarme;
     private String status;
@@ -13,10 +14,11 @@ public class user  {
     public user() {
     }
 
-    public user(Long id, String name, String lastname, String birthday, String usernarme, String status) {
+    public user(Long id, String name, String lastname,String surname, String birthday, String usernarme, String status) {
         this.id = id;
         this.name = name;
         this.lastname = lastname;
+        this.usernarme=usernarme;
         this.birthday = birthday;
         this.usernarme = usernarme;
         this.status = status;
@@ -33,6 +35,10 @@ public class user  {
     public String getLastname() {
         return lastname;
     }
+    public String getSurname() {
+        return surname;
+    }
+
 
     public String getBirthday() {
         return birthday;
@@ -56,6 +62,9 @@ public class user  {
 
     public void setLastname(String lastname) {
         this.lastname = lastname;
+    }
+    public void setSurname(String surname) {
+        this.surname = surname;
     }
 
     public void setBirthday(String birthday) {
