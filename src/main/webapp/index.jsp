@@ -9,39 +9,7 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col text-center mt-5">
-      <h2>Usuarios</h2>
-      <p>Practica 1 Servlets para realizar un CRUD de usuarios</p>
-      <div class="card">
-        <div class="card-header">
-            <div class="col">Listado de Usuarios</div>
-            <div class="col text-end" >
-              <button class="btn btn-outline-success btn-sm">Agregar
-              </button>
-            </div>
-        </div>
-        <div class="card-body">
-          <table class="table table-stripped">
-            <thead>
-            <th>#</th>
-            <th>Nombre</th>
-            <th>fecha de nacimiento</th>
-            <th>Usuario</th>
-            <th>Estado</th>
-            <th>Acciones</th>
-            </thead>
-            <tbody>
-            <tr>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-            </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
+      <a href="user/users">Usuarios</a>
     </div>
   </div>
 </div>

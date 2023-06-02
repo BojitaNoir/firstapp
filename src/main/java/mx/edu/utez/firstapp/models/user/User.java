@@ -1,8 +1,6 @@
 package mx.edu.utez.firstapp.models.user;
 
-import mx.edu.utez.firstapp.models.crud.DaoRepository;
-
-public class user  {
+public class User {
     private Long id;
     private String name;
     private String lastname;
@@ -11,10 +9,10 @@ public class user  {
     private String usernarme;
     private String status;
 
-    public user() {
+    public User() {
     }
 
-    public user(Long id, String name, String lastname,String surname, String birthday, String usernarme, String status) {
+    public User(Long id, String name, String lastname, String surname, String birthday, String usernarme, String status) {
         this.id = id;
         this.name = name;
         this.lastname = lastname;
