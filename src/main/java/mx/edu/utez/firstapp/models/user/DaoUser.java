@@ -47,21 +47,91 @@ private ResultSet rs;
 
     @Override
     public User findOne(Long id) {
+        try{
+
+            conn = new MySQLConnection().connect();
+            String query ="SELECT * FROM users WHERE id=?;";
+            pstm = conn.prepareStatement(query);
+            pstm.setLong(1,id);
+            rs=pstm.executeQuery();
+            User User = new User();
+            if (rs.next()){
+
+                User.setId(rs.getLong("id"));
+                User.setName(rs.getString("name"));
+                User.setLastname(rs.getString("lastname"));
+                User.setSurname(rs.getString("surname"));
+                User.setBirthday(rs.getString("birthday"));
+                User.setUsernarme(rs.getString("username"));
+                User.setStatus(rs.getString("status"));
+            }
+            return User;
+        }catch (SQLException e){
+            Logger.getLogger(DaoUser.class.getName())
+                    .log(Level.SEVERE,"Error FindOne"+ e.getMessage());
+        }finally {
+            close();
+        }
         return null;
     }
-
     @Override
     public boolean save(User object) {
+        try{
+            conn = new MySQLConnection().connect();
+            String query ="INSERT INTO users (name,lastname,surname,birthday,username,status) values (?,?,?,?,?,?);";
+            pstm = conn.prepareStatement(query);
+            pstm.setString(1, object.getName());
+            pstm.setString(2, object.getLastname());
+            pstm.setString(3,object.getSurname());
+            pstm.setString(4, object.getBirthday());
+            pstm.setString(5, object.getUsernarme());
+            pstm.setString(6, object.getStatus());
+            return pstm.executeUpdate()>0;
+        }catch(SQLException e){
+
+        }finally {
+            close();
+        }
+
         return false;
     }
 
     @Override
     public boolean update(User object) {
+        try{
+            conn = new MySQLConnection().connect();
+            String query ="UPDATE users SET name=?,lastname=?,"+
+                    "surname=?,birthday=?,username=?,status=? WHERE id=?;";
+            pstm = conn.prepareStatement(query);
+            pstm.setString(1, object.getName());
+            pstm.setString(2, object.getLastname());
+            pstm.setString(3,object.getSurname());
+            pstm.setString(4, object.getBirthday());
+            pstm.setString(5, object.getUsernarme());
+            pstm.setString(6, object.getStatus());
+            pstm.setLong(7,object.getId());
+            return pstm.executeUpdate()>0;
+        }catch(SQLException e){
+
+        }finally {
+            close();
+        }
         return false;
     }
 
     @Override
     public boolean delete(Long id) {
+        try{
+            conn = new MySQLConnection().connect();
+            String query ="SELECT users WHERE id=?;";
+            pstm = conn.prepareStatement(query);
+            pstm.setLong(1,id);
+            return pstm.executeUpdate()==1;
+        }catch (SQLException e){
+            Logger.getLogger(DaoUser.class.getName()).log(Level.SEVERE,"Error Delete"+ e.getMessage());;
+        }finally {
+            close();
+        }
         return false;
     }
     public void close(){

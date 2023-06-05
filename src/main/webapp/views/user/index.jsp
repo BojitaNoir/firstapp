@@ -5,9 +5,8 @@
   Time: 09:37 a. m.
   To change this template use File | Settings | File Templates.
 --%>
- page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<%@ taglib prefix="c" uri="jakarta.tags.core" %>
-<%@taglib prefix="fmt" uri="jakarta.tags.fmt" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -23,7 +22,7 @@
             <div class="card">
                 <div class="card-header">
                     <div class="col">Listado de Usuarios</div>
-                    <div class="col text-end" >
+                    <div class="col text-end">
                         <button class="btn btn-outline-success btn-sm">Agregar
                         </button>
                     </div>
@@ -43,10 +42,9 @@
                             <tr>
                                 <td>
                                         <c:out value="${s.count}"/>
-
-                                    /td>
                                 <td>
-                                    <c:out value="${user.name}"/><c:out value="${user.surname}"/><c:out value="${user.lastname}"/>
+                                    <c:out value="${user.name}"/><c:out value="${user.surname}"/><c:out
+                                        value="${user.lastname}"/>
                                 </td>
                                 <td>
                                     <c:out value="${user.birthday}"/>
