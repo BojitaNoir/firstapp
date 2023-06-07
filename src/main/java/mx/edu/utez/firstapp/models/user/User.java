@@ -6,19 +6,19 @@ public class User {
     private String lastname;
     private String surname;
     private String birthday;
-    private String usernarme;
+    private String username;
     private String status;
 
     public User() {
     }
 
-    public User(Long id, String name, String lastname, String surname, String birthday, String usernarme, String status) {
+    public User(Long id, String name, String lastname, String surname, String birthday, String username, String status) {
         this.id = id;
         this.name = name;
         this.lastname = lastname;
-        this.usernarme=usernarme;
+        this.surname=surname;
         this.birthday = birthday;
-        this.usernarme = usernarme;
+        this.username = username;
         this.status = status;
     }
 
@@ -42,8 +42,8 @@ public class User {
         return birthday;
     }
 
-    public String getUsernarme() {
-        return usernarme;
+    public String getUsername() {
+        return username;
     }
 
     public String getStatus() {
@@ -69,8 +69,8 @@ public class User {
         this.birthday = birthday;
     }
 
-    public void setUsernarme(String usernarme) {
-        this.usernarme = usernarme;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public void setStatus(String status) {

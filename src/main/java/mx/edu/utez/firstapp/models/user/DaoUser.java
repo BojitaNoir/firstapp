@@ -32,7 +32,7 @@ private ResultSet rs;
                 User.setLastname(rs.getString("lastname"));
                 User.setSurname(rs.getString("surname"));
                 User.setBirthday(rs.getString("birthday"));
-                User.setUsernarme(rs.getString("username"));
+                User.setUsername(rs.getString("username"));
                 User.setStatus(rs.getString("status"));
                 users.add(User);
             }
@@ -62,7 +62,7 @@ private ResultSet rs;
                 User.setLastname(rs.getString("lastname"));
                 User.setSurname(rs.getString("surname"));
                 User.setBirthday(rs.getString("birthday"));
-                User.setUsernarme(rs.getString("username"));
+                User.setUsername(rs.getString("username"));
                 User.setStatus(rs.getString("status"));
             }
             return User;
@@ -84,7 +84,7 @@ private ResultSet rs;
             pstm.setString(2, object.getLastname());
             pstm.setString(3,object.getSurname());
             pstm.setString(4, object.getBirthday());
-            pstm.setString(5, object.getUsernarme());
+            pstm.setString(5, object.getUsername());
             pstm.setString(6, object.getStatus());
             return pstm.executeUpdate()>0;
         }catch(SQLException e){
@@ -107,7 +107,7 @@ private ResultSet rs;
             pstm.setString(2, object.getLastname());
             pstm.setString(3,object.getSurname());
             pstm.setString(4, object.getBirthday());
-            pstm.setString(5, object.getUsernarme());
+            pstm.setString(5, object.getUsername());
             pstm.setString(6, object.getStatus());
             pstm.setLong(7,object.getId());
             return pstm.executeUpdate()>0;

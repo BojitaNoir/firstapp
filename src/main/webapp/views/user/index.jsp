@@ -23,8 +23,8 @@
                 <div class="card-header">
                     <div class="col">Listado de Usuarios</div>
                     <div class="col text-end">
-                        <button class="btn btn-outline-success btn-sm">Agregar
-                        </button>
+                        <a href="/user/user-view" class="btn btn-outline-success btn-sm">Agregar
+                        </a>
                     </div>
                 </div>
                 <div class="card-body">
