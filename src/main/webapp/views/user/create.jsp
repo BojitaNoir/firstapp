@@ -1,4 +1,3 @@
-
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
@@ -14,7 +13,7 @@
             <div class="card mt-5">
                 <div class="card-header">Registro de usuarios</div>
                 <div class="card-body">
-                    <form id="user-form" class="needs-validation" novalidate action="user/save" method="post">
+                    <form id="user-form" class="needs-validation" novalidate action="/user/save" method="post">
                         <div class="form-group mb-3">
                             <div class="row">
                                 <div class="col">
@@ -27,37 +26,35 @@
                                     <input type="text" name="surname" id="surname" class="form-control" required>
                                     <div class="invalid-feedback">Campo Obligatorio</div>
                                 </div>
-                                </div>
+                            </div>
+                            <div class="col">
+                                <label for="lastname" class="fw-bold">Segundo Apellido:</label>
+                                <input type="text" name="lastname" id="lastname" class="form-control" required>
+                                <div class="invalid-feedback">Campo Obligatorio</div>
+                            </div>
+                        </div>
+                        <div class="form-group mb-3">
+                            <div class="row">
                                 <div class="col">
-                                    <label for="lastname" class="fw-bold">Segundo Apellido:</label>
-                                    <input type="text" name="lastname" id="lastname" class="form-control" required>
+                                    <label for="birthday" class="fw-bold">Fecha de nacimiento:</label>
+                                    <input type="date" name="birthday" id="birthday" class="form-control" required>
                                     <div class="invalid-feedback">Campo Obligatorio</div>
                                 </div>
-                                </div>
-                            </div>
-                            <div class="form-group mb-3">
-                                <div class="row">
-                                    <div class="col">
-                                        <label for="birthday" class="fw-bold">Fecha de nacimiento:</label>
-                                        <input type="date" name="birthday" id="birthday" class="form-control" required>
-                                        <div class="invalid-feedback">Campo Obligatorio</div>
-                                    </div>
-                                    <div class="col">
-                                        <label for="username" class="fw-bold">Usuario:</label>
-                                        <input type="text" name="username" id="username" class="form-control" required>
-                                        <div class="invalid-feedback">Campo Obligatorio</div>
-                                    </div>
+                                <div class="col">
+                                    <label for="username" class="fw-bold">Usuario:</label>
+                                    <input type="text" name="username" id="username" class="form-control" required>
+                                    <div class="invalid-feedback">Campo Obligatorio</div>
                                 </div>
                             </div>
                         </div>
-            <div class="form-group mb-3">
-                <div class="row">
-                    <div class="col text-end">
-                        <a href="user/users" class="btn btn-outline-danger btn-sm">CANCELAR</a>
-                        <button type="submit" class="btn btn-outline-success btn-sm">ACEPTAR</button>
-                    </div>
-                </div>
-            </div>
+                        <div class="form-group mb-3">
+                            <div class="row">
+                                <div class="col text-end">
+                                    <a href="/user/users" class="btn btn-outline-danger btn-sm">CANCELAR</a>
+                                    <button type="submit" class="btn btn-outline-success btn-sm">ACEPTAR</button>
+                                </div>
+                            </div>
+                        </div>
                     </form>
                 </div>
             </div>
@@ -66,10 +63,10 @@
 </div>
 <jsp:include page="../../layouts/footer.jsp"/>
 <script>
-    (function (){
+    (function () {
         const form = document.getElementById("user-form");
-        form.addEventListener("submit",function (event){
-            if (!form.checkValidity()){
+        form.addEventListener("submit", function (event) {
+            if (!form.checkValidity()) {
                 event.preventDefault();
                 event.stopPropagation();
             }

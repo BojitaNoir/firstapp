@@ -13,7 +13,7 @@ import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 
-@WebServlet(name = "users",urlPatterns = {
+@WebServlet(name = "users", urlPatterns = {
         "/user/users",
         "/user/user",
         "/user/user-view",
@@ -24,26 +24,26 @@ import java.util.List;
 })
 public class ServletUser extends HttpServlet {
     private String action;
-    private String redirect ="/user/users";
-    private String name,surname,lastname,username,birthday,status;
+    private String redirect = "/user/users";
+    private String name, surname, lastname, username, birthday, status;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setCharacterEncoding("UTF-8");
-        action= req.getServletPath();
-        switch (action){
+        action = req.getServletPath();
+        switch (action) {
             case "/user/users":
                 List<User> users = new DaoUser().findAll();
-                req.setAttribute("users",users);
-                redirect ="/views/user/index.jsp";
-            break;
+                req.setAttribute("users", users);
+                redirect = "/views/user/index.jsp";
+                break;
             case "/user/user-view":
                 redirect = "/views/user/create.jsp";
                 break;
             default:
                 System.out.println(action);
         }
-        req.getRequestDispatcher(redirect).forward(req,resp);
+        req.getRequestDispatcher(redirect).forward(req, resp);
     }
 
     @Override
@@ -52,36 +52,38 @@ public class ServletUser extends HttpServlet {
         resp.setCharacterEncoding("UTF-8");
         resp.setContentType("text/html");
         action = req.getServletPath();
-        switch (action){
+        switch (action) {
             case "/user/user-view-update":
-                String id= req.getParameter("id");
+                String id = req.getParameter("id");
                 User user = new DaoUser().findOne(
-                        id!=null ? Long.parseLong(id): 0
+                        id != null ? Long.parseLong(id) : 0
                 );
-                if (user!=null){
-                    req.setAttribute("user",user);
+                if (user != null) {
+                    req.setAttribute("user", user);
                     redirect = "/views/user/update.jsp";
-                }else {
+                } else {
                     redirect = "/user/users";
                 }
-            break;
+                break;
             case "/user/save":
-                name=req.getParameter("name");
-                surname=req.getParameter("surname");
-                lastname=req.getParameter("lastname");
-                username=req.getParameter("username");
-                birthday=req.getParameter("birthday");
-                status=req.getParameter("status");
-                User user1 = new User(0L,name,surname,lastname,username,birthday,status);
-                Boolean result = new DaoUser().save(user1);
-                if (result){
-                    redirect="/user/users?result" + result+ "&message="+ URLEncoder.encode
+                name = req.getParameter("name");
+                surname = req.getParameter("surname");
+                lastname = req.getParameter("lastname");
+                username = req.getParameter("username");
+                birthday = req.getParameter("birthday");
+                User user1 = new User(0L, name, surname, lastname,birthday, username, "ACTIVO");
+                boolean result = new DaoUser().save(user1);
+                if (result) {
+                    redirect = "/user/users?result" + result + "&message=" + URLEncoder.encode
                             ("Usuario registrado correctamente", StandardCharsets.UTF_8);
-                }else{
-                    redirect="/user/users?result" + result+ "&message="+ URLEncoder.encode
+                } else {
+                    redirect = "/user/users?result" + result + "&message=" + URLEncoder.encode
                             ("Error Usuario no registrado correctamente", StandardCharsets.UTF_8);
                 }
                 break;
-                }
+
         }
+        resp.sendRedirect(req.getContextPath() + redirect);
+    }
+
 }

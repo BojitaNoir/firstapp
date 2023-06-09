@@ -13,33 +13,35 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class DaoUser implements DaoRepository<User> {
-private Connection conn;
-private PreparedStatement pstm;
-private ResultSet rs;
+    private Connection conn;
+    private PreparedStatement pstm;
+    private ResultSet rs;
+
     @Override
     public List<User> findAll() {
         List<User> users = new ArrayList<>();
-        try{
+        try {
 
             conn = new MySQLConnection().connect();
-            String query ="SELECT * FROM users;";
+            String query = "SELECT * FROM users;";
             pstm = conn.prepareStatement(query);
-            rs=pstm.executeQuery();
-            while (rs.next()){
+            rs = pstm.executeQuery();
+            while (rs.next()) {
                 User User = new User();
                 User.setId(rs.getLong("id"));
                 User.setName(rs.getString("name"));
-                User.setLastname(rs.getString("lastname"));
+
                 User.setSurname(rs.getString("surname"));
+                User.setLastname(rs.getString("lastname"));
                 User.setBirthday(rs.getString("birthday"));
                 User.setUsername(rs.getString("username"));
                 User.setStatus(rs.getString("status"));
                 users.add(User);
             }
-        }catch (SQLException e){
+        } catch (SQLException e) {
             Logger.getLogger(DaoUser.class.getName())
-                    .log(Level.SEVERE,"Error FindAll"+ e.getMessage());
-        }finally {
+                    .log(Level.SEVERE, "Error FindAll" + e.getMessage());
+        } finally {
             close();
         }
         return users;
@@ -47,73 +49,75 @@ private ResultSet rs;
 
     @Override
     public User findOne(Long id) {
-        try{
+        try {
 
             conn = new MySQLConnection().connect();
-            String query ="SELECT * FROM users WHERE id=?;";
+            String query = "SELECT * FROM users WHERE id=?;";
             pstm = conn.prepareStatement(query);
-            pstm.setLong(1,id);
-            rs=pstm.executeQuery();
+            pstm.setLong(1, id);
+            rs = pstm.executeQuery();
             User User = new User();
-            if (rs.next()){
+            if (rs.next()) {
 
                 User.setId(rs.getLong("id"));
                 User.setName(rs.getString("name"));
-                User.setLastname(rs.getString("lastname"));
                 User.setSurname(rs.getString("surname"));
+                User.setLastname(rs.getString("lastname"));
                 User.setBirthday(rs.getString("birthday"));
                 User.setUsername(rs.getString("username"));
                 User.setStatus(rs.getString("status"));
             }
             return User;
-        }catch (SQLException e){
+        } catch (SQLException e) {
             Logger.getLogger(DaoUser.class.getName())
-                    .log(Level.SEVERE,"Error FindOne"+ e.getMessage());
-        }finally {
+                    .log(Level.SEVERE, "Error FindOne" + e.getMessage());
+        } finally {
             close();
         }
         return null;
     }
+
     @Override
     public boolean save(User object) {
-        try{
+        try {
             conn = new MySQLConnection().connect();
-            String query ="INSERT INTO users (name,lastname,surname,birthday,username,status) values (?,?,?,?,?,?);";
+            String query = "INSERT INTO users (name,lastname,surname,birthday,username,status) values (?,?,?,?,?,?);";
             pstm = conn.prepareStatement(query);
             pstm.setString(1, object.getName());
+            pstm.setString(3, object.getSurname());
             pstm.setString(2, object.getLastname());
-            pstm.setString(3,object.getSurname());
             pstm.setString(4, object.getBirthday());
             pstm.setString(5, object.getUsername());
             pstm.setString(6, object.getStatus());
-            return pstm.executeUpdate()>0;
-        }catch(SQLException e){
-
-        }finally {
+            return pstm.executeUpdate() > 0;
+        } catch (SQLException e) {
+            Logger.getLogger(DaoUser.class.getName())
+                    .log(Level.SEVERE, "Error save" + e.getMessage());
+        } finally {
             close();
         }
-
         return false;
     }
 
     @Override
     public boolean update(User object) {
-        try{
+        try {
             conn = new MySQLConnection().connect();
-            String query ="UPDATE users SET name=?,lastname=?,"+
+            String query = "UPDATE users SET name=?,lastname=?," +
                     "surname=?,birthday=?,username=?,status=? WHERE id=?;";
             pstm = conn.prepareStatement(query);
             pstm.setString(1, object.getName());
+            pstm.setString(3, object.getSurname());
             pstm.setString(2, object.getLastname());
-            pstm.setString(3,object.getSurname());
             pstm.setString(4, object.getBirthday());
             pstm.setString(5, object.getUsername());
             pstm.setString(6, object.getStatus());
-            pstm.setLong(7,object.getId());
-            return pstm.executeUpdate()>0;
-        }catch(SQLException e){
-
-        }finally {
+            pstm.setLong(7, object.getId());
+            return pstm.executeUpdate() > 0;
+        } catch (SQLException e) {
+            Logger.getLogger(DaoUser.class.getName())
+                    .log(Level.SEVERE, "Error Update" + e.getMessage());
+        } finally {
             close();
         }
         return false;
@@ -121,25 +125,27 @@ private ResultSet rs;
 
     @Override
     public boolean delete(Long id) {
-        try{
+        try {
             conn = new MySQLConnection().connect();
-            String query ="SELECT users WHERE id=?;";
+            String query = "SELECT users WHERE id=?;";
             pstm = conn.prepareStatement(query);
-            pstm.setLong(1,id);
-            return pstm.executeUpdate()==1;
-        }catch (SQLException e){
-            Logger.getLogger(DaoUser.class.getName()).log(Level.SEVERE,"Error Delete"+ e.getMessage());;
-        }finally {
+            pstm.setLong(1, id);
+            return pstm.executeUpdate() == 1;
+        } catch (SQLException e) {
+            Logger.getLogger(DaoUser.class.getName()).log(Level.SEVERE, "Error Delete" + e.getMessage());
+            ;
+        } finally {
             close();
         }
         return false;
     }
-    public void close(){
+
+    public void close() {
         try {
-            if(conn!=null) conn.close();
-            if (pstm!=null) pstm.close();
-            if(rs!=null) pstm.close();
-        }catch (SQLException e){
+            if (conn != null) conn.close();
+            if (pstm != null) pstm.close();
+            if (rs != null) pstm.close();
+        } catch (SQLException e) {
 
         }
     }
