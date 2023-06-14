@@ -91,6 +91,35 @@ public class ServletUser extends HttpServlet {
                             ("Error Usuario no registrado correctamente", StandardCharsets.UTF_8);
                 }
                 break;
+            case "/user/update":
+                id = req.getParameter("id");
+                name = req.getParameter("name");
+                surname = req.getParameter("surname");
+                lastname = req.getParameter("lastname");
+                username = req.getParameter("username");
+                birthday = req.getParameter("birthday");
+                status = req.getParameter("status");
+                user = new User(Long.parseLong(id), name, surname, lastname,birthday, username, status);
+                if (new DaoUser().update(user)) {
+                    redirect = "/user/users?result" + true + "&message=" + URLEncoder.encode
+                            ("Usuario actualizado correctamente", StandardCharsets.UTF_8);
+                } else {
+                    redirect = "/user/users?result" + true + "&message=" + URLEncoder.encode
+                            ("Error Usuario no actualizado correctamente", StandardCharsets.UTF_8);
+                }
+                break;
+            case "/user/delete":
+                id = req.getParameter("id");
+                if (new DaoUser().delete(Long.parseLong(id)))
+                    redirect = "/user/users?result" + true + "&message=" + URLEncoder.encode
+                            ("Usuario borrado correctamente", StandardCharsets.UTF_8);
+        else
+            redirect = "/user/users?result" + true + "&message=" + URLEncoder.encode
+                    ("Error Usuario no borrado correctamente", StandardCharsets.UTF_8);
+
+                break;
+            default:
+                redirect = "/user/users";
 
         }
         resp.sendRedirect(req.getContextPath() + redirect);

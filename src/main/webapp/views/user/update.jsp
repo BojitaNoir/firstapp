@@ -13,6 +13,7 @@
                     <form id="user-form" class="needs-validation" novalidate action="/user/update" method="post">
                         <div class="form-group mb-3">
                             <input type="hidden" value="${user.id}" name="id">
+                            <input type="hidden" value="${user.status}" name="status">
                             <div class="row">
                                 <div class="col">
                                     <label for="name" class="fw-bold">Nombre:</label>

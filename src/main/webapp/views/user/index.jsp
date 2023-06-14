@@ -60,6 +60,10 @@
                                         <input hidden value="${user.id}" name="id">
                                         <button type="submit" class="btn btn-outline-warning btn-sm">Editar</button>
                                     </form>
+                                    <form method="post" action="/user/user-view-delete">
+                                    <input hidden value="${user.id}" name="id">
+                                    <button type="submit" class="btn btn-outline-danger btn-sm">Eliminar</button>
+                                    </form>
                                 </td>
                             </tr>
                         </c:forEach>
