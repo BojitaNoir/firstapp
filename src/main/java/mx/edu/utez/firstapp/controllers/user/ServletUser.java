@@ -110,17 +110,14 @@ public class ServletUser extends HttpServlet {
                 break;
             case "/user/delete":
                 id = req.getParameter("id");
-                if (new DaoUser().delete(Long.parseLong(id)))
-                    redirect = "/user/users?result" + true + "&message=" + URLEncoder.encode
-                            ("Usuario borrado correctamente", StandardCharsets.UTF_8);
-        else
-            redirect = "/user/users?result" + true + "&message=" + URLEncoder.encode
-                    ("Error Usuario no borrado correctamente", StandardCharsets.UTF_8);
+                if (new DaoUser().delete(Long.parseLong(id))) {
+                    redirect = "/user/users?result="+true+"&message="+ URLEncoder.encode("¡Exito! Usuario eliminado correctamente.", StandardCharsets.UTF_8);
+                }else
+                    redirect = "/user/users?result="+false+"&message="+ URLEncoder.encode("¡ERROR! Usuario no eliminado.", StandardCharsets.UTF_8);
 
                 break;
             default:
                 redirect = "/user/users";
-
         }
         resp.sendRedirect(req.getContextPath() + redirect);
     }
